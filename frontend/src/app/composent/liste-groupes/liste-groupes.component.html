@@ -42,10 +42,16 @@
         </div>
     </nav>
     <div class="mx-auto mt-5 bg-light w-75">
-        <h1 class="text-center">Liste des precedement groupes créés</h1>
+        <h1 class="text-center">Liste des groupes precedement créés</h1>
         <div class="container">
-            <div class="my-3">
+            <div *ngIf="taille!=0" class="my-3">
                 <a href="/groupe"><button type="button" class="btn btn-primary">Generer d'autres groupes</button></a>
+            </div>
+        </div>
+        <div *ngIf="taille==0" class="card m-2 text-center" style="height: 575px;border-style: none;">
+            <div class="position-relative alert text-danger m-2 h4" style="top : 210px">
+                <p> Aucune vague de groupes </p>
+                <a href="/groupe"><button type="button" class="btn btn-primary">Generer des groupes</button></a>
             </div>
         </div>
         <div *ngFor="let groupe of groupes, let i= index" class="card mt-2 ml-2 mr-2 bg-info">
