@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des etudiants</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-info">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Bare de navigation</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse offset-4" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active text-white" aria-current="page" href="/">Acceuil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link  text-white" href="/ajoutE">Ajouter un etudiant</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="/ajoutS">Ajouter un Sujet</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="/sujets">Liste des sujets</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="/groupe">Creer les groupes</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-white" href="/groupes">Voir les anciens groupes</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="container mt-2 h-100">
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="row bg-warning p-2 mb-2">
+                <span class="col-md-3 text-center align-middle form-group">
+                    <label for="nb" class="form-label h6">Nombre de groupe à former</label>
+                </span>
+                <span class="col-md-4">
+                    <input id="nb" formControlName="nb" type="number" min="2" max="" name="nom" class="form-control"
+                        required>
+                </span>
+                <div class="col-md-4 offset-2form-group">
+                    <input [disabled]="!form.valid" class="btn btn-primary w-100" type="submit" value="Former">
+                </div>
+            </div>
+        </form>
+        <div class="card bg-info">
+            <div class="card-title bg-success text-white text-center">
+                <h4>Liste des groupes formés</h4>
+            </div>
+            <div class="card-body">
+                <div *ngIf="!nb" class="alert alert-danger text-center h5">Veuillez renseigner le nombre de groupes à
+                    former</div>
+                <div *ngFor="let groupe of groupes,let i=index" class="row">
+                    <div class="card mt-2">
+                        <div class="card-title text-center">Groupe {{i+1}}</div>
+                        <div class="card-header">Sujet : {{groupe["sujet"]["nom"]}}</div>
+                        <div class="card-body">
+                            <li *ngFor="let me of groupe['membreG']">{{me["nom"]+" "+me["prenom"]}}</li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
