@@ -13,6 +13,16 @@ public class Etudiant {
     private String nom;
     private String prenom;
     private String adresse;
+
+    public Etudiant() {
+    }
+
+    public Etudiant(String nom, String prenom, String adresse) {
+        this.nom=nom.toUpperCase();
+        this.prenom=prenom;
+        this.adresse=adresse;
+    }
+
     public Long getId() {
         return id;
     }

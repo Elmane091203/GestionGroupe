@@ -34,6 +34,7 @@ public class GroupeServiceImpl implements GroupeService {
     @Override
     public List<List<Groupe>> listDesGroupes() {
         List<List<Groupe>> g = new ArrayList<>();
+        int rest= 0;
         List<Groupe> basG = (List<Groupe>) repertoireGroupe.findAll();
         for (int i = 0; i < basG.size(); i++) {
             List<Groupe> groups = new ArrayList<>();
@@ -48,8 +49,7 @@ public class GroupeServiceImpl implements GroupeService {
                                 membreG.add(etudiantService.findById(Long.parseLong(listE[k])).get());
 
                         }
-                    }
-                    catch (IndexOutOfBoundsException e) {
+                    } catch (IndexOutOfBoundsException e) {
 
                         for (k = listE.length - membreG.size(); k < listE.length; k++) {
                             if (etudiantService.findById(Long.parseLong(listE[k])).isPresent())
@@ -60,15 +60,41 @@ public class GroupeServiceImpl implements GroupeService {
                     }
                     groups.add(new Groupe(membreG, repertoireSujet.findById(basG.get(j).getIdS()).get()));
                     if (basG.get(j).getIdCreation() != basG.get(j + 1).getIdCreation()) {
-                        i = j ;
+                        i = j;
                         break;
                     }
                 }
             } catch (IndexOutOfBoundsException exception) {
+                rest =i;
                 break;
             }
-
             g.add(groups);
+        }
+        if (g.size() - basG.size() != 0) {
+            List<Groupe> groups = new ArrayList<>();
+            for (int i = rest; i < basG.size(); i++) {
+                String[] listE = diviser(basG.get(i).getMembre().split("|"), "|");
+                List<Etudiant> membreG = new ArrayList<>();
+                int k;
+                try {
+                    for (k = 0; k < listE.length; k++) {
+                        if (etudiantService.findById(Long.parseLong(listE[k])).isPresent())
+                            membreG.add(etudiantService.findById(Long.parseLong(listE[k])).get());
+
+                    }
+                } catch (IndexOutOfBoundsException e) {
+
+                    for (k = listE.length - membreG.size(); k < listE.length; k++) {
+                        if (etudiantService.findById(Long.parseLong(listE[k])).isPresent())
+                            membreG.add(etudiantService.findById(Long.parseLong(listE[k])).get());
+                    }
+
+                }
+                groups.add(new Groupe(membreG, repertoireSujet.findById(basG.get(i).getIdS()).get()));
+            }
+            g.add(groups);
+
+
         }
 
         return g;

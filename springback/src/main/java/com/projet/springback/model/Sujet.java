@@ -11,6 +11,13 @@ public class Sujet {
     private Long id;
     private String nom;
 
+    public Sujet(String nom) {
+        this.nom=nom;
+    }
+
+    public Sujet() {
+    }
+
     public Long getId() {
         return id;
     }
