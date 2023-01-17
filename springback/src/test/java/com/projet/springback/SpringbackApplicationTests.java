@@ -25,6 +25,7 @@ class SpringbackApplicationTests {
     @Autowired
     GroupeService groupeService;
 
+    @Test
     void contextLoads() {
         if (((List<Etudiant>) repertoirEtudiant.findAll()).size() == 0) {
             repertoirEtudiant.save(new Etudiant("Djaanffar Houmadi", "Elmane", "elmane@groupeisi.com"));
@@ -42,14 +43,17 @@ class SpringbackApplicationTests {
         }
     }
 
+    @Test
     void testRandE() {
 
     }
 
+    @Test
     void testRand() {
 
     }
 
+    @Test
     void testGenerGroupe() {
         List<Groupe> l = (List<Groupe>) repertoireGroupe.findAll();
         int t = 0;
