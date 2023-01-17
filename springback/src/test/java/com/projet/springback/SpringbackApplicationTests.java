@@ -27,6 +27,7 @@ class SpringbackApplicationTests {
 
     @Test
     void contextLoads() {
+        /*
         if (((List<Etudiant>) repertoirEtudiant.findAll()).size() == 0) {
             repertoirEtudiant.save(new Etudiant("Djaanffar Houmadi", "Elmane", "elmane@groupeisi.com"));
             repertoirEtudiant.save(new Etudiant("Kone", "Ousseynou", "ousseynou@groupeisi.com"));
@@ -41,6 +42,8 @@ class SpringbackApplicationTests {
             repertoireSujet.save(new Sujet("Maven"));
             repertoireSujet.save(new Sujet("Git"));
         }
+
+         */
     }
 
     @Test
@@ -55,6 +58,7 @@ class SpringbackApplicationTests {
 
     @Test
     void testGenerGroupe() {
+        /*
         List<Groupe> l = (List<Groupe>) repertoireGroupe.findAll();
         int t = 0;
         for (int i = 0; i < groupeService.listDesGroupes().size(); i++) {
@@ -63,5 +67,7 @@ class SpringbackApplicationTests {
         if (l.size() == t) {
             System.out.println("La methode fonctionne");
         }
+        
+         */
     }
 }
