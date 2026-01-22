@@ -14,17 +14,25 @@ import { Sujet } from 'src/app/Sujet';
 })
 export class AjoutSujetComponent implements OnInit {
   constructor(private service: AppService, private router: Router) {}
-  data: Partial<Sujet> | null = null;
 
   form = new FormGroup({
     nom: new FormControl('', [Validators.required]),
   });
   ngOnInit(): void {}
   submit() {
-    this.data = this.form.value;
-    console.log(this.data);
+    if (!this.form.valid) {
+      return;
+    }
 
-    this.service.ajoutS(this.data).subscribe({
+    const formValue = this.form.value;
+    const sujet: Sujet = {
+      id: 0,
+      nom: formValue.nom || ''
+    };
+
+    console.log(sujet);
+
+    this.service.ajoutS(sujet).subscribe({
       next: (data) => {
         console.log(data);
         this.router.navigate(['/sujets']);

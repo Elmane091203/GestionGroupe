@@ -1,6 +1,7 @@
 package com.projet.springback.controller;
 
 import com.projet.springback.model.Groupe;
+import com.projet.springback.model.GroupeRequest;
 import com.projet.springback.service.GroupeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,8 @@ public class GroupeController {
     @Autowired
     private GroupeService groupeService;
     @PostMapping("/groupe")
-    public List<Groupe> genererLesGroupes(@RequestBody String groupe) {
-        return groupeService.gener(Integer.parseInt(groupe));
+    public List<Groupe> genererLesGroupes(@RequestBody GroupeRequest groupeRequest) {
+        return groupeService.gener(Integer.parseInt(groupeRequest.getNb()));
     }
 
     @GetMapping("/groupes")

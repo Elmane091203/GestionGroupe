@@ -14,7 +14,6 @@ import { Etudiant } from 'src/app/Etudiant';
 })
 export class AjoutEtudiantComponent implements OnInit {
   constructor(private service: AppService, private router: Router) {}
-  data: Partial<Etudiant> | null = null;
 
   form = new FormGroup({
     nom: new FormControl('', [Validators.required]),
@@ -23,10 +22,21 @@ export class AjoutEtudiantComponent implements OnInit {
   });
   ngOnInit(): void {}
   submit() {
-    this.data = this.form.value;
-    console.log(this.data);
+    if (!this.form.valid) {
+      return;
+    }
 
-    this.service.ajoutE(this.data).subscribe({
+    const formValue = this.form.value;
+    const etudiant: Etudiant = {
+      id: 0,
+      nom: formValue.nom || '',
+      prenom: formValue.prenom || '',
+      adresse: formValue.adresse || ''
+    };
+
+    console.log(etudiant);
+
+    this.service.ajoutE(etudiant).subscribe({
       next: (data) => {
         console.log(data);
         this.router.navigate(['/']);
